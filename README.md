@@ -15,3 +15,12 @@ Java crawler for https://www.ricardo.ch
 - You should then run the crawler by running "java -jar crawler-0.0.1-SNAPSHOT-jar-with-dependencies.jar" from target directory.
 - If you haven't changed crawledDataPath from crawler.properties, you should be able to see crawled data in target/crawled_data directory.
 - It's also possible to provide configuration setting when running "java -jar crawler-0.0.1-SNAPSHOT-jar-with-dependencies.jar", but this is not implemented yet.
+
+## Docker build and run
+- Run "docker build -t ricardocrawler_image ." at project root containing Dockerfile to create an image.
+- Run "docker run -t -d ricardocrawler_image" to run the image in container.
+- Run "docker ps -a" to get container id.
+- Set IP of the server in crawler.properties to your host IP address where you have MongoDB installed that should be used by different instances of crawler.
+- Run "docker exec -it <container_id> bash -c "cd /srv/ricardocrawler; mvn install;" to build the project.
+- Run "docker exec -it <container_id> bash -c "cd /srv/ricardocrawler/target; java -jar crawler-0.0.1-SNAPSHOT-jar-with-dependencies.jar""
+- Crawled data will be created in target folder if not defined differently in crawler.properties.
